@@ -27,7 +27,7 @@ namespace SharpeningTheSaw
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<RecipesContext>(options =>
+            services.AddDbContext<RecipesContext> (options =>
            options.UseSqlite(Configuration["ConnectionStrings:RecipesDbConnection"]
             ));
         }
@@ -54,6 +54,8 @@ namespace SharpeningTheSaw
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("mealtype", "MealType/{mealtype}/{mealtypename}", new { controller = "Home", action = "Index"});
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

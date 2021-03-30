@@ -1,0 +1,8 @@
+﻿@model IEnumerable<RecipeClass>
+
+<a asp-action="Index" asp-controller="Home" asp-route-mealtype="">Home</a>
+<br />
+@foreach (var x in Model)
+    {
+          <a asp-action="Index" asp-controller="Home" asp-route-mealtype="@x.RecipeClassId" asp-route-mealtypename="@x.RecipeClassDescription">@x.RecipeClassDescription</a>     <br />
+    }  

@@ -14,7 +14,7 @@ namespace SharpeningTheSaw.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        private RecipesContext _context { get; set; }
+        private RecipesContext _context;
 
         public HomeController(ILogger<HomeController> logger, RecipesContext ctx)
         {
@@ -22,11 +22,11 @@ namespace SharpeningTheSaw.Controllers
             _context = ctx;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(long? mealtype)
         {
             return View(_context.Recipes
-                .FromSqlInterpolated($"SELECT * FROM Recipes ORDER BY RecipeTitle DESC")
-                .ToList());
+            .FromSqlInterpolated($"SELECT * FROM Recipes WHERE RecipeClassId = {mealtype} OR {mealtype} IS NULL")
+            .ToList());
         }
 
         public IActionResult Privacy()
